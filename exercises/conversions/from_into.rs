@@ -33,10 +33,23 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of Person
 // Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
-
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        if s.is_empty() {
+            Person::default()
+        }
+        else{
+            let coords = s.split(',').collect::<Vec<&str>>();
+            if coords[0].is_empty() || coords.len() !=2 {
+                Person::default()
+            }
+            else{
+                let nam = coords[0].parse::<String>();
+                let ag = coords[1].parse::<usize>();
+                Person{name: nam,age: ag}
+            }
+
+        }
     }
 }
 

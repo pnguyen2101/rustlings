@@ -4,14 +4,29 @@
 // You can read more about it at https://doc.rust-lang.org/std/str/trait.FromStr.html
 use std::error;
 use std::str::FromStr;
+use std::fmt;
+
 
 #[derive(Debug)]
 struct Person {
     name: String,
     age: usize,
 }
-
-// I AM NOT DONE
+#[derive(PartialEq, Debug)]
+enum MyError{
+    Zero,
+    MoreTwo,
+}
+impl error::Error for MyError{}
+impl fmt::Display for MyError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let description = match *self {
+            MyError::MoreTwo => "Number is moreTwo",
+            MyError::Zero => "Number is zero",
+        };
+        f.write_str(description)
+    }
+}
 
 // Steps:
 // 1. If the length of the provided string is 0, an error should be returned
@@ -26,6 +41,22 @@ struct Person {
 impl FromStr for Person {
     type Err = Box<dyn error::Error>;
     fn from_str(s: &str) -> Result<Person, Self::Err> {
+        if s.is_empty(){
+            Err(Box::new(MyError::Zero))
+        }
+        else{
+            let coor: Vec<&str> = s.split(',').collect();
+            if coor.len() == 2 && !coor[0].is_empty()  {
+                let name = coor[0].parse::<String>()?;
+                let age = coor[1].parse::<usize>()?;
+                Ok(Person{name, age})
+            }
+            else{
+                Err(Box::new(MyError::Zero))
+            }
+        }
+        
+
     }
 }
 
