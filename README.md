@@ -2,6 +2,13 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-92-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
+# Personal Rustlings Solutions 
+This is my personal solution for Rustlings project.
+Great material for beginners who want to learn and practice RUST programming language.com
+
+All credit go to `rustlings` creators and contributors.
+
+
 # rustlings 🦀❤️
 
 Greetings and welcome to `rustlings`. This project contains small exercises to get you used to reading and writing Rust code. This includes reading and responding to compiler messages!
