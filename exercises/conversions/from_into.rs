@@ -40,15 +40,17 @@ impl From<&str> for Person {
         }
         else{
             let coords = s.split(',').collect::<Vec<&str>>();
-            if coords[0].is_empty() || coords.len() !=2 {
-                Person::default()
-            }
-            else{
-                let nam = coords[0].parse::<String>();
-                let ag = coords[1].parse::<usize>();
+            if !coords[0].is_empty() && coords.len() ==2{
+                let nam = coords[0].parse::<String>().unwrap();
+                let ag = match coords[1].parse::<usize>(){
+                    Ok(x) => x,
+                    Err(_) => return Person::default(),
+                };
                 Person{name: nam,age: ag}
             }
-
+            else{
+                Person::default()
+                }
         }
     }
 }
